@@ -27,4 +27,29 @@ input.search {
     text-align: center;
     outline: 0;
     border: 10px solid #f7f7f7;
+    width: 120%;
+    left: -10%;
+    position: relative;
+    top: 10px;
+    z-index: 2;
+    border-radius: 5px;
+    font-size: 40px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.12), inset 0 0 10px rgba(0, 0, 0, 0.12);
+}
+
+.suggestions li {
+    background: #ffffff;
+    list-style: none;
+    border-bottom: 1px solid #d8d8d8;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    margin: 0;
+    padding: 20px;
+    text-transform: capitalize;
+    display: flex;
+    justify-content: space-between;
+    transition: background 0.2s;
+}
+
+.suggestions li:nth-child(even){
+    transform: perspective(100px);
 }
