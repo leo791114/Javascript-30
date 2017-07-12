@@ -16,13 +16,35 @@ const data = fetch(endpoint).then(blob => blob.json())
 function findMatches(wordToMatch, cities) {
     return cities.filter(place => {
         // here we need to figure out if the city or state matches what was searched 
+        // g: global i: case-insensitive
         const matches = new RegExp(wordToMatch, 'gi');
         return place.city.match(matches) || place.state.match(matches);
     });
 }
 
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+}
+
 function displayMatches() {
-    console.log(this.value);
+    // console.log(this.value);
+    const matchArray = findMatches(this.value, cities2);
+    console.log(matchArray);
+    const html = matchArray.map(place => {
+        const regex = new RegExp(this.value, 'gi');
+        const cityName = place.city.replace(regex, `<span class="hl">${this.value}</span>`);
+        const cityState = place.state.replace(regex, `<span class="hl">${this.value}</span>`);
+        // const cityName = place.city.replace()
+        return `
+        <li>
+            <span class="name">${cityName}, ${cityState}</span>
+            <span class="population">${numberWithCommas(place.population)}</span>
+            <span class="population">${place.population}</span>
+        </li>
+        `;
+    }).join('');
+    // console.log(html);
+    suggestions.innerHTML = html;
 }
 
 const searchInput = document.querySelector('.search');
