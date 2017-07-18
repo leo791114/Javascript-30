@@ -8,7 +8,7 @@ html {
     margin: 50px auto;
     background: #ffffff;
     border-radius: 5px;
-    box-shadow: 10px 10px 0 rgba(0,0,0,0.1);
+    box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.1);
 }
 
 .item {
@@ -21,15 +21,20 @@ html {
     border-bottom: 0;
 }
 
-input[type='checkbox']{
+input:checked+p {
+    background: #f9f9f9;
+    text-decoration: line-through;
+}
+
+input[type='checkbox'] {
     margin: 20px;
 }
 
-p{
+p {
     margin: 0;
     padding: 20px;
     transition: background 0.2;
-    flex:1;
+    flex: 1;
     font-family: 'helvetica neue';
     font-size: 20px;
     font-weight: 200;

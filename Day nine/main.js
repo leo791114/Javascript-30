@@ -46,7 +46,7 @@ console.clear();
 // Viewing DOM Elements
 console.log(p);
 console.dir(p);
-console.clear();
+// console.clear();
 
 // Grouping together
 dogs.forEach(dog => {
