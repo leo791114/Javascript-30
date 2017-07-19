@@ -6,22 +6,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" type="text/css" href="style.css">
-    <script src="main.js"></script>
+    <script src="main.js" defer></script>
     <title>Document</title>
 </head>
 
 <body>
     <div class="player">
-        <video src="https://player.vimeo.com/external/194837908.sd.mp4?s=c350076905b78c67f74d7ee39fdb4fef01d12420&profile_id=164"
-            controls></video>
+        <video class="player__video viewer" src="https://player.vimeo.com/external/194837908.sd.mp4?s=c350076905b78c67f74d7ee39fdb4fef01d12420&profile_id=164"></video>
 
-        <div class="player_controls">
+        <div class="player__controls">
             <div class="progress">
-                <div class="progress_filled"></div>
+                <div class="progress__filled"></div>
             </div>
-            <button class="player_button toggle" title="Toggle Play">&#8883;</button>
-            <input type="range" class="player_slider" name="volume" min="0" max="1" step="0.05" value="1">
-            <input type="range" class="player_slider" name="playerbackRate" min="0.5" max="2" step="0.1" value="1">
+            <button class="player__button toggle" title="Toggle Play">&#8883;</button>
+            <input type="range" class="player__slider" name="volume" min="0" max="1" step="0.05" value="1">
+            <input type="range" class="player__slider" name="playerbackRate" min="0.5" max="2" step="0.1" value="1">
+            <button class="player__button" data-skip="-10">&#8810; 10s</button>
+            <button class="player__button" data-skip="25">25s &#8811;</button>
         </div>
     </div>
 
