@@ -1,0 +1,110 @@
+<html>
+
+<head>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', {
+            'packages': ['corechart']
+        });
+        //google.charts.setOnLoadCallback();
+
+        var inputData = [
+            ['name', 'value']
+        ];
+
+        function addForm() {
+            var formDiv = document.getElementById("formDiv");
+            var name = document.getElementById("name").value;
+            var value = document.getElementById("value").value;
+            var title = document.getElementById("title").value;
+            inputData.push([name, parseInt(value)]);
+            document.getElementById("form").reset();
+            formDiv.innerHTML = '<div id="formDiv"></div>';
+            for (var i = 1; i < inputData.length; i++) {
+                formDiv.innerHTML += '<input type="checkbox" id=' + i + ' >' + inputData[i][0] + inputData[i][1] +
+                    '<br>';
+            }
+            //console.log(inputData);
+            drawChart(title, inputData);
+
+        }
+
+        function remove(e) {
+            //console.log(this);
+            //console.log(e);
+            e.preventDefault();
+
+            for (var i = 1; i < inputData; i++) {
+                console.log(i);
+                console.log(String(i));
+                // if (document.getElementById(String(i)).checked == true) {
+                // delete inputData[i];
+                // console.log(inputData);
+                // }
+
+            }
+
+            // var formDiv = document.getElementById("formDiv");
+            // var name = document.getElementById("name").value;
+            // var value = document.getElementById("value").value;
+            // var title = document.getElementById("title").value;
+            //e.preventDefault();
+            //
+            // }
+        }
+        // formDiv.innerHTML = '<div id="formDiv"></div>';
+        // for (var i = 1; i < inputData.length; i++) {
+        // formDiv.innerHTML += '<input type="checkbox" id=' + i + ' >' + inputData[i][0] + inputData[i][1] + '<br>';
+        // }
+        // //console.log(inputData);
+        // drawChart(title, inputData);
+        // document.getElementById("form").reset();
+        //}
+        function removeAll() {
+            console.log("hi");
+            inputData = [
+                ['name', 'value']
+            ];
+            // formDiv.innerHTML = '<div id="formDiv"></div>';
+            //現在是增加checkbox,
+            var piechart = document.getElementById("piechart");
+            piechart.innerHTML = '<div id="piechart" style="width: 600px; height: 500px;"></div>'
+            document.getElementById("form").reset();
+
+        }
+
+        function drawChart(title, inputData) {
+            var data = google.visualization.arrayToDataTable(inputData);
+
+            var options = {
+                title: title
+            };
+
+            var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+            chart.draw(data, options);
+        }
+    </script>
+</head>
+
+<body>
+    圓餅圖產生器 請輸入資料<br>
+
+    <input id="title" value="" placeholder="請輸入title"><br><br>
+    <div id="formDiv"></div>
+    <form id="form" action="">
+        <input id="name" value="" placeholder="請輸入sliceLabel">
+        <input id="value" value="" placeholder="請輸入slicevalue"><br>
+        <button type="button" onclick="addForm()">++Add</button>
+        <button id="submit" type="submit">remove</button>
+        <button type="button" onclick="removeAll()">remove all</button>
+    </form>
+
+    <div id="piechart" style="width: 600px; height: 500px;"></div>
+
+</body>
+
+</html>
+<script>
+    var form = document.querySelector("#form");
+    form.addEventListener('submit', remove);
+</script>

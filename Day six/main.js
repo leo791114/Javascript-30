@@ -13,6 +13,7 @@ const cities2 = [];
 const data = fetch(endpoint).then(blob => blob.json())
     .then(data => cities2.push(...data));
 
+
 function findMatches(wordToMatch, cities) {
     return cities.filter(place => {
         // here we need to figure out if the city or state matches what was searched 
