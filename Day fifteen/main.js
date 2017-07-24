@@ -1,6 +1,8 @@
 const addItems = document.querySelector('.add-items');
 const itemLists = document.querySelector('.plates');
-const items = JSON.parse(localStorage.getItem('items')) || [];
+const clearButton = document.querySelector('button');
+let items = JSON.parse(localStorage.getItem('items')) || [];
+console.log(clearButton);
 console.log(items);
 
 function addItem(e) {
@@ -38,24 +40,41 @@ function toggleDone(e) {
     if (!e.target.matches('input')) return; //Skip this unless it's an input
     const eventTarget = e.target;
     const targetIndex = eventTarget.dataset.index;
-    console.log(eventTarget);
-    console.log(eventTarget.dataset.index);
-    console.log(items[targetIndex]);
-    console.log(items[targetIndex].done);
+    // console.log(eventTarget);
+    // console.log(eventTarget.dataset.index);
+    // console.log(items[targetIndex]);
+    // console.log(items[targetIndex].done);
     items[targetIndex].done = !items[targetIndex].done;
-    console.log(items[targetIndex].done);
+    // console.log(items[targetIndex].done);
     localStorage.setItem('items', JSON.stringify(items));
+
+}
+
+
+function clearChecked(e) {
+    let checkedItems = [],
+        arrayDifference;
+
+    checkedItems = items.filter(item => {
+        return item.done === true;
+    });
+    console.log(checkedItems);
+    console.log(items);
+    arrayDifference = items.filter(item => checkedItems.indexOf(item) == -1);
+    console.log(arrayDifference);
+    localStorage.setItem('items', JSON.stringify(arrayDifference));
+    console.log(localStorage.items);
+    populateList(arrayDifference, itemLists);
 
 }
 
 
 addItems.addEventListener('submit', addItem);
 itemLists.addEventListener('click', toggleDone);
+clearButton.addEventListener('click', clearChecked);
 populateList(items, itemLists);
 
 // const checkBoxes = document.querySelectorAll('input');
 // checkBoxes.forEach(input => input.addEventListener('click', () => alert('hi')));
 // console.log(checkBoxes);
 // The above doesn't work because whole list items are create after the defining of checkBoxes.
-
-
