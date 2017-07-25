@@ -6,24 +6,24 @@ html {
 body {
     margin: 0;
     background: url("https://source.unsplash.com/nDqA4d5NL0k/2000x2000");
-    background-size: cover; 
+    background-size: cover;
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh; 
+    min-height: 100vh;
 }
 
 #bands {
     list-style: square inside;
     font-size: 20px;
-    background: #000000;
+    background: #ffffff;
     width: 500px;
     margin: auto;
     padding: 0;
-    box-shadow: 0 0 0 20px rgba(0,0,0,0.05);
+    box-shadow: 0 0 0 20px rgba(0, 0, 0, 0.05);
 }
 
-#bands li{
+#bands li {
     border-bottom: 1px solid #efefef;
     padding: 20px;
 }
