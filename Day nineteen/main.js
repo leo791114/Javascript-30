@@ -84,7 +84,8 @@ function greenScreen(pixels) {
 
     document.querySelectorAll('.rgb input').forEach((input) => {
         levels[input.name] = input.value;
-        // console.log(levels);
+        console.log(input);
+        console.log(levels);
     });
 
     for (i = 0; i < pixels.data.length; i += 4) {
@@ -93,12 +94,12 @@ function greenScreen(pixels) {
         blue = pixels.data[i + 2];
         alpha = pixels.data[i + 3];
 
-        if (red >= levels.rmin
-            && green >= levels.gmin
-            && blue >= levels.bmin
-            && red <= levels.rmax
-            && green <= levels.gmax
-            && blue <= levels.bmax
+        if (red >= levels.rmin &&
+            green >= levels.gmin &&
+            blue >= levels.bmin &&
+            red <= levels.rmax &&
+            green <= levels.gmax &&
+            blue <= levels.bmax
         ) {
             // take it out!
             pixels.data[i + 3] = 0;
@@ -108,7 +109,7 @@ function greenScreen(pixels) {
 }
 
 getVideo();
-greenScreen();
+
 
 
 video.addEventListener('canplay', paintToCanvas);
