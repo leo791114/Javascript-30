@@ -1,0 +1,14 @@
+{
+  "name": "twenty-one",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "start": "browser-sync start --directory --server --files '*.css, *.html, *.js' --https"
+  },
+  "author": "GUAN HONG, LIOU",
+  "license": "MIT",
+  "dependencies": {
+    "browser-sync": "^2.18.13"
+  }
+}
