@@ -28,14 +28,14 @@ function paintToCanvas() {
         // take the pixels out
         let pixels = ctx.getImageData(0, 0, width, height);
         // mess with them
-        // console.log(pixels);
-        // pixels = redEffect(pixels);
+        console.log(pixels);
+        pixels = redEffect(pixels);
         // pixels = rgbSplit(pixels);
         // ctx.globalAlpha = 0.1;
         // put them back
-        pixels = greenScreen(pixels);
+        // pixels = greenScreen(pixels);
         ctx.putImageData(pixels, 0, 0);
-        // debugger;
+        debugger;
     }, 16);
 }
 

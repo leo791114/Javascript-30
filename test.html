@@ -3,82 +3,85 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>JS Drum Kit</title>
-    <link rel="stylesheet" href="Day one/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>canvas</title>
+
 </head>
 
 <body>
-
-    <div class="keys">
-        <div data-key="1" class="key">
-            <kbd>1</kbd>
-            <span class="sound">DO</span>
-        </div>
-        <div data-key="2" class="key">
-            <kbd>2</kbd>
-            <span class="sound">RE</span>
-        </div>
-        <div data-key="3" class="key">
-            <kbd>3</kbd>
-            <span class="sound">MI</span>
-        </div>
-        <div data-key="4" class="key">
-            <kbd>4</kbd>
-            <span class="sound">FA</span>
-        </div>
-        <div data-key="5" class="key">
-            <kbd>5</kbd>
-            <span class="sound">SOL</span>
-        </div>
-        <div data-key="6" class="key">
-            <kbd>6</kbd>
-            <span class="sound">LA</span>
-        </div>
-        <div data-key="7" class="key">
-            <kbd>7</kbd>
-            <span class="sound">SI</span>
-        </div>
-    </div>
-    <audio data-key="2" src="./Day one/sounds/boom.wav"></audio>
-    <audio data-key="1" src="./Day one/sounds/boom.wav"></audio>
-    <audio data-key="3" src="./Day one/sounds/boom.wav"></audio>
-    <audio data-key="4" src="./Day one/sounds/boom.wav"></audio>
-    <audio data-key="5" src="./Day one/sounds/boom.wav"></audio>
-    <audio data-key="6" src="./Day one/sounds/boom.wav"></audio>
-    <audio data-key="7" src="./Day one/sounds/boom.wav"></audio>
-
-    <script>
-        function playAudio(e) {
-
-            const happyBirthdaySong = ['5', '5', '6', '5', '1', '7', '5', '5', '6', '5', '2', '1', '5', '5', '5', '3',
-                '1', '7', '6', '4', '4', '3', '1', '2', '1'
-            ];
-
-            for (var i = 0; i < happyBirthdaySong.length; i++) {
-
-                var keyCode = happyBirthdaySong[i];
-                const audio = document.querySelector(`audio[data-key="${keyCode}"]`);
-                console.log(audio);
-                if (!audio) return;
-                const key = document.querySelector(`div[data-key="${keyCode}"]`);
-                if (!key) return;
-                audio.currentTime = 0;
-                audio.play();
-                key.classList.add('playing');
-            }
-        }
-
-        function stopTransition(e) {
-            if (e.propertyName !== 'transform') return;
-            console.log(this === e.target);
-            e.target.classList.remove('playing');
-        }
-
-        window.addEventListener('keydown', playAudio);
-        const keys = Array.from(document.querySelectorAll('.key'));
-        keys.forEach(key => key.addEventListener('transitionend', stopTransition));
-    </script>
-
+    <input type="color" id="color" value="#000000">>
+    <canvas id="cvs" width="800" height="600" style="border:1px solid black"></canvas>
+    <div><img id="icon" src="like.png" alt=""></div>
 </body>
+<script>
+    var cvs, ctx, icon, color, x, y, size;
+    var iconClick = false;
 
-</html>
+
+    cvs = document.getElementById("cvs");
+    icon = document.getElementById("icon");
+    color = document.getElementById("color");
+    ctx = cvs.getContext("2d");
+    color.addEventListener("change", colorChange);
+    icon.addEventListener("click", clickIcon);
+    cvs.addEventListener("click", (e) => {
+        console.log(iconClick);
+        clickCvs(e);
+        if (iconClick === true) {
+            console.log('123');
+            drawIcon();
+        } else {
+            console.log('111')
+            drawStar();
+        }
+        // iconClick = false;
+        console.log(iconClick);
+    })
+
+
+
+    function colorChange() {
+        cvs.strokeStyle = color.value;
+        // cvs.addEventListener("click", clickCvs);
+        // if (x !== undefined) {
+        //     console.log(x);
+        // } else {
+        //     console.log("沒東西呀")
+        // }
+        // console.log(x);//錯誤 上面那行還沒跑！
+
+    }
+
+
+    function clickCvs(e) {
+        x = e.clientX - cvs.offsetLeft;
+        y = e.clientY - cvs.offsetTop;
+        size = Math.random() * 80 + 20; //20~100
+
+    }
+
+    function drawStar() {
+        ctx.save(); //儲存當前設定
+        ctx.fillStyle = color.value;
+        //以上是原始座標系統
+        ctx.translate(x, y);
+        //以下translate後的座標系統
+        ctx.fillRect(-size / 2, -size / 2, size, size); //context.fillRect(x,y,width,height);
+        ctx.rotate(Math.PI / 4);
+        //以下rotate後的新座標系統
+        ctx.fillRect(-size / 2, -size / 2, size, size);
+        //恢復座標系統的設定
+        ctx.restore();
+        console.log(x, y, ctx.fillStyle, size);
+    }
+
+    function clickIcon() {
+        iconClick = !iconClick;
+        icon.style.opacity = "0.6";
+    }
+
+    function drawIcon(e) {
+        ctx.drawImage(icon, x, y, icon.width, icon.height);
+    }
+</script>

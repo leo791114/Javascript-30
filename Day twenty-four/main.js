@@ -5,7 +5,7 @@ function fixNav() {
     console.log(topOfNav, window.scrollY);
     console.log(nav);
     if (topOfNav <= window.scrollY) {
-        document.body.style.paddingTop = nav.offsetHeight + 'px';
+        // document.body.style.paddingTop = nav.offsetHeight + 'px';
         document.body.classList.add('fixed-nav');
     } else {
         document.body.style.paddingTop = 0;
