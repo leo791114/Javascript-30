@@ -12,7 +12,14 @@
 
 <body>
     <h1>Whack-a-mole! <span class="score">0</span></h1>
-    <button>Start!</button>
+    <button class="record">Historical Record</button>
+    <form class="player_info">
+        <input type="text" name="player" placeholder="Name" required>
+        <input type="submit" value="Start Playing!">
+    </form>
+    <ul class="showRecords">
+        <li>Loading...</li>
+    </ul>
 
     <div class="game">
         <div class="hole hole1">
